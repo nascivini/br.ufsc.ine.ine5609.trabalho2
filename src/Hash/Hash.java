@@ -2,8 +2,8 @@ package Hash;
 
 /*
 @author Vinicius Nascimento
-@author Marco Aurélio Geremias
-Data Structures, 2018-1. Profº De Lucca - Federal University of Santa Catarina, Brazil, UFSC
+@author Marco AurÃ©lio Geremias
+Data Structures, 2018-1. ProfÂº De Lucca - Federal University of Santa Catarina, Brazil, UFSC
 */
 public class Hash {
 
@@ -19,6 +19,29 @@ public class Hash {
 		//set all the positions with an -1
 	}
 
+	public void insert(int element){
+		int group = element % scatteringAreaSize;
+		int positionToInsert = this.hash(group);
+		this.hash[positionToInsert][0] = element;
+		if((positionToInsert + scatteringAreaSize) > this.hash.length){
+			this.hash[positionToInsert][1] = -1; 
+		}
+		else{
+			this.hash[positionToInsert][1] = group + scatteringAreaSize; 
+		}
+	}
+
+	public int hash(int group){
+		if(this.hash[group][0] == -1){
+			return group;
+		}
+		else if(group <= scatteringAreaSize){
+			this.hash(group + scatteringAreaSize);
+		}
+	}
+
+
+/*
 	public void insert(int newElement){
 		int group = newElement % scatteringAreaSize;
 		if(group == -1) {
@@ -49,6 +72,7 @@ public class Hash {
 		}
 
 	}
+*/
 
 	public void delete (int element){
 		if(this.search(element)) {
@@ -123,7 +147,7 @@ public class Hash {
 	public void printHash() {
 
 		for(int i = 0; i < this.hash.length; i ++) {
-			System.out.println("Posição: " + i + ", Dado: " + this.hash[i][0] + ", Próxima Posição:  " + this.hash[i][1]);
+			System.out.println("PosiÃ§Ã£o: " + i + ", Dado: " + this.hash[i][0] + ", PrÃ³xima PosiÃ§Ã£o:  " + this.hash[i][1]);
 		}
 		System.out.println("------------------------------------------------------------------------");
 
