@@ -24,7 +24,7 @@ public class Hash {
 		int positionToInsert = this.hash(group);
 		this.hash[positionToInsert][0] = element;
 		if((positionToInsert + scatteringAreaSize) > this.hash.length){
-			this.hash[positionToInsert][1] = -1; 
+			this.hash[positionToInsert][1] = -2; 
 		}
 		else{
 			this.hash[positionToInsert][1] = group + scatteringAreaSize; 
